@@ -1,0 +1,63 @@
+
+/* ---- reset ---- */
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+}
+
+button {
+    color: rgb(14, 6, 6);
+    background: rgb(60, 60, 197);
+}
+
+
+/* ---- typography ---- */
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    background: grey;
+    color: white;
+    padding: 20px;
+    /* background-image: url(test.jpg);
+    /*background-size: auto;
+}
+*/
+}
+
+h1 {
+    color: white;
+}
+
+h2 {}
+
+h3 {}
+
+
+
+
+/* ---- layout ---- */
+
+
+
+
+
+/* ---- components ---- */
+
+
+#start {
+text-align: center;
+}
+
+#game-over {
+text-align: center;
+}
+
+  
