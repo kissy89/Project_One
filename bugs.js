@@ -10,7 +10,7 @@ function Bugs(ctx, width, height){
     self.gameWidth = width;
     self.gameHeight = height;
 
-    self.x = 380;
+    self.x = Math.random() * 300;
     self.y = self.gameHeight / 2;
     self.direction = null;
 }
@@ -25,7 +25,7 @@ Bugs.prototype.draw = function () {
     var self = this;
     
     self.ctx.fillStyle = "white";
-    self.ctx.fillRect(self.x, 380, self.size, self.size);
+    self.ctx.fillRect(self.x, self.y, self.size, self.size);
 }
 
 Bugs.prototype.animation = function () {

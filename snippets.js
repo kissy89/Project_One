@@ -30,6 +30,6 @@ Snippets.prototype.animation = function () {
 Snippets.prototype.draw = function () {
     var self = this;
     
-    self.ctx.fillStyle = "white";
-    self.ctx.fillRect(450, 380, self.size, self.size);
+    self.ctx.fillStyle = "red";
+    self.ctx.fillRect(350, 380, self.size, self.size);
 }

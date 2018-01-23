@@ -18,19 +18,31 @@ function Game(mainDiv) {
   self.ctx = self.canvas.getContext('2d');
 
   self.player = new Player(self.ctx, self.width, self.height);
-  self.bug = new Bugs(self.ctx, self.width, self.height);
-  // self.snippet = new Snippets(self.ctx, self.width, self.height);
-  // self.background = new Background();
+  self.snippet = new Snippets(self.ctx, self.width, self.height);
+  self.bug = new Bug(self.ctx, self.width, self.height);
   self.environment = new Environment(self.ctx, self.canvas);
 
- function doAnimation() {
+//   var bugsArray = [];
+// @ todo - random bugs
+// function init() {
+    
+//     for (var i = 0; i < 10; i++){
+//         var x = 800;
+//         var y = Math.random() * 100;
+//         var self.width = Math.random() * 50;
+//         var self.width = Math.random() * 50;
+//         bugsArray.push(new bug(self.ctx, self.width, self.height));
+//     } 
+// }
+
+function doAnimation() {
 
      self.ctx.clearRect(0,0, 800, 500);
      self.environment.render();
+     self.environment.update();
      self.player.draw();
      self.bug.draw();
      self.bug.animation();
-     self.environment.update();
 
     if (!self.finished){
      window.requestAnimationFrame(doAnimation);
