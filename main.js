@@ -7,9 +7,6 @@ function main(){
   var game;
   var level;
 
-  // var bg = new Image();
-  // bg.src = "Untitled.jpg";
-
   var startPage;
   var startButton = "";
   var startClick = function () {
@@ -45,11 +42,11 @@ function main(){
   function goToGame(){
       stage = "game";
       game = new Game(mainDiv);
-    }
+  }
 
   var gameOver;
-    var playAgainButton;
-    var playAgainClick = function () {
+  var playAgainButton;
+  var playAgainClick = function () {
       destroyGameOverScreen();
       goToGame();
     };

@@ -19,8 +19,18 @@ function Game(mainDiv) {
 
   self.player = new Player(self.ctx, self.width, self.height);
   self.snippet = new Snippets(self.ctx, self.width, self.height);
-  self.bug = new Bug(self.ctx, self.width, self.height);
+  self.bug = new Bugs(self.ctx, self.width, self.height);
   self.environment = new Environment(self.ctx, self.canvas);
+
+  self.jumping = function (event) {
+    var key = event.key.toLowerCase();
+    if (key === "Space"){
+      self.player.velY = -16;
+      console.log("test");
+  }
+}
+  document.addEventListener('keydown', self.jumping);
+
 
 //   var bugsArray = [];
 // @ todo - random bugs
@@ -35,14 +45,17 @@ function Game(mainDiv) {
 //     } 
 // }
 
-function doAnimation() {
+  function doAnimation() {
 
      self.ctx.clearRect(0,0, 800, 500);
      self.environment.render();
      self.environment.update();
      self.player.draw();
+    //  self.player.update();
+    //  self.player.render();
      self.bug.draw();
      self.bug.animation();
+
 
     if (!self.finished){
      window.requestAnimationFrame(doAnimation);
@@ -59,4 +72,5 @@ Game.prototype.destroy = function () {
 
   self.canvas.remove();
 
-};
+  document.removeEventListener('keydown', self.jumping);
+}
