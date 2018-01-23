@@ -23,7 +23,6 @@ button {
 
 body {
     font-family: Helvetica, Arial, sans-serif;
-    background: grey;
     color: white;
     padding: 20px;
     /* background-image: url(test.jpg);
@@ -53,11 +52,12 @@ h3 {}
 
 
 #start {
-text-align: center;
+    text-align: center;
 }
 
 #game-over {
-text-align: center;
+    text-align: center;
 }
+
 
   
