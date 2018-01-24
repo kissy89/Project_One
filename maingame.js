@@ -3,29 +3,29 @@
 function Game(mainDiv) {
   var self = this;
 
-  self.score = 0;
-
   self.mainDiv = mainDiv;
 
   self.finished = false;
-  self.score = 0;
+  self.score = 0; // score or lives
+  self.lives = 5;
+
   self.width = window.innerWidth;
   self.height = window.innerHeight;
 
-  self.canvas = document.createElement('canvas');
+  self.canvas = document.createElement('canvas'); // creating canvas for dom
   self.canvas.width = 800;
   self.canvas.height = 500;
   mainDiv.appendChild(self.canvas);
 
-  var footer = document.createElement("footer");
-  footer.innerText = "Copyright: Stephanie Senoner";
-  mainDiv.appendChild(footer);
+  self.footer = document.createElement("footer"); // ev remove
+  self.footer.innerText = "Copyright: Stephanie Senoner";
+  mainDiv.appendChild(self.footer);
 
 
   self.ctx = self.canvas.getContext('2d');
+  
   self.player = new Player(self.ctx, self.width, self.height);
   self.environment = new Environment(self.ctx, self.canvas);
-
   self.bug = new Bugs(self.ctx, self.width, self.height);
 
   window.setInterval( function(){ 
@@ -36,22 +36,26 @@ function Game(mainDiv) {
   window.setInterval( function(){ 
     self.snippetsArray.push(new Snippets(self.ctx, self.width, self.height));
     }, 2500);
-  
+  //@ todo snippetsArray ev with images out of code
   window.addEventListener("keydown", self.player.jump.bind(self.player));
   window.addEventListener("keyup", self.player.jump.bind(self.player));
 
-  // function detectionCollision() {
+  // function detectionCollisionBugs() {
   //   for (var i = 0; i < self.bugs.length; i++){
   //   if (self.player.x < self.bugs[i].x + self.bugs[i].size &&
   //     self.player.x + self.player.size > self.bugs[i].x &&
   //     self.player.y < self.bugs[i].y + self.bugs[i].size &&
   //     self.player.size + self.player.y > self.bugs[i].y) {
-  //      self.score -= 10;
+  //      self.lives -= 1;
   //      self.bugs.splice(self.bugs.indexOf(self.bugs[i], 1));
   //   }
   // }
   // }
   
+  if (self.score < 200 || self.lives === 0){
+    self.finished = true;
+  } 
+
   function detectionSnippets() {
     for (var i = 0; i < self.snippetsArray.length; i++){
 
@@ -65,7 +69,7 @@ function Game(mainDiv) {
     }
   }
   }
-
+ //@ todo 
   function doAnimation() {
 
      self.ctx.clearRect(0,0, 800, 500);
@@ -104,9 +108,10 @@ Game.prototype.destroy = function () {
   self.finished = true;
 
   self.canvas.remove();
-  
-  window.removeEventListener("keydown", self.player.jump.unbind(self.player));
-  window.removeEventListener("keyup", self.player.jump.unbind(self.player));
+  self.footer.remove();
+
+  window.removeEventListener("keydown", self.player.jump.bind(self.player));
+  window.removeEventListener("keyup", self.player.jump.bind(self.player));
 }
 
 // Game.prototype.onGameOver = function(){

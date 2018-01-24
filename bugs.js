@@ -24,7 +24,7 @@ Bugs.prototype.setDirection = function (){
 
     self.direction = direction;
 }
-
+// @todo create array with bugs and randomly appear
 Bugs.prototype.draw = function () {
     var self = this;
     

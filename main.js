@@ -25,6 +25,7 @@ function main(){
     startPage.appendChild(title);
 
     startButton = document.createElement("button");
+    startButton.setAttribute("class", "buttons");
     startButton.innerText = "Start the Game";
     startPage.appendChild(startButton);
 
@@ -42,6 +43,15 @@ function main(){
   function goToGame(){
       stage = "game";
       game = new Game(mainDiv);
+
+      window.setTimeout(function () {
+        destroyGame();
+        gameOverScreen1();
+      }, 1000);
+  }
+
+  function destroyGame(){
+    game.destroy();
   }
 
   var gameOver;
@@ -50,7 +60,7 @@ function main(){
       destroyGameOverScreen();
       goToGame();
     };
-
+    // @todo destroy footer or fixed position
   function gameOverScreen1() {
     stage = 'end';
 
@@ -69,6 +79,16 @@ function main(){
     endText.innerText = "poor you - write more code";
     gameOver.appendChild(endText);
 
+    var beerImage = document.createElement("img");
+    beerImage.setAttribute("src", "https://giphy.com/stickers/beer-Cs8ipz3YqOyYw");
+    beerImage.setAttribute("height", "300");
+    beerImage.setAttribute("width", "350");
+    beerImage.setAttribute("alt", "beer");
+    gameOver.appendChild(beerImage);
+
+    //@ todo gameoverscreen2 if win
+    //@ todo if condition - loose or winning situation
+
     playAgainButton = document.createElement("button");
     playAgainButton.innerText = "play again";
     gameOver.appendChild(playAgainButton);
@@ -78,13 +98,10 @@ function main(){
     playAgainButton.addEventListener("click", playAgainClick);
   }
 
-
-
-  // // game.onGameOver()
-  // function destroyGameOverScreen() {
-  //   playAgainButton.removeEventListener('click', playAgainClick);
-  //   gameOver.remove();
-  // }
+  function destroyGameOverScreen(){
+    playAgainButton.removeEventListener("click", playAgainClick);
+    gameOver.remove();
+  }
 
   buildStartPage();
 
