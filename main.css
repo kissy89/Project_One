@@ -47,7 +47,9 @@ footer {
     width: 800px;
 }
 
-
+.sprite {
+    display: none;
+}
 
 /* ---- layout ---- */
 

@@ -71,8 +71,10 @@ function Game(mainDiv) {
      self.ctx.clearRect(0,0, 800, 500);
      self.environment.render();
      self.environment.update();
-     self.player.draw();
-     self.bug.draw();
+    //  self.player.draw();
+     self.player.render();
+    //  self.bug.draw();
+     self.bug.render();
      self.bug.animation();
      self.snippetsArray.forEach(function(element) {
       element.draw();

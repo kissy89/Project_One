@@ -14,6 +14,10 @@ function Player(ctx, width, height){
     self.gameWidth = width;
     self.gameHeight = height;
 
+    self.sprites = [document.getElementById("sprite1"), document.getElementById("sprite2"),
+    document.getElementById("sprite3"), document.getElementById("sprite4"),document.getElementById("sprite5")];
+
+
     self.x = 110;
     self.y = 420;
     self.direction = null;
@@ -60,18 +64,12 @@ Player.prototype.draw = function () {
     self.ctx.fillRect(self.x, self.y, self.size, self.size);
 }
 
-// Player.prototype.update = function () {
-//     var self = this;
-//     self.y += self.velY;
-//     if (self.y < 350){ this.velY -= -4;}
-// }
-
-// Player.prototype.render = function () {
-//     var self = this;
-//     var renderX = self.x - self.width/2;
-//     var renderY = self.y - self.height/2;
-//     self.ctx.drawImage(self.sprites[0], renderX, renderY)
-// }
+Player.prototype.render = function () {
+     var self = this;
+     var renderX = self.x - self.size/2;
+     var renderY = self.y - self.size/2;
+     self.ctx.drawImage(self.sprites[0], renderX, renderY)
+}
 
 Player.prototype.controller = function () {
     var self = this;

@@ -13,6 +13,10 @@ function Bugs(ctx, width, height){
     self.x = 850;
     self.y = Math.random() * 350;
     self.direction = null;
+
+    self.sprites = [document.getElementById("sprite2"), document.getElementById("sprite2"),
+    document.getElementById("sprite3"), document.getElementById("sprite4"),document.getElementById("sprite5")];
+
 }
 
 Bugs.prototype.setDirection = function (){
@@ -27,6 +31,14 @@ Bugs.prototype.draw = function () {
     self.ctx.fillStyle = "white";
     self.ctx.fillRect(self.x, self.y, self.size, self.size);
 }
+
+Bugs.prototype.render = function () {
+    var self = this;
+    var renderX = self.x - self.size/2;
+    var renderY = self.y - self.size/2;
+    self.ctx.drawImage(self.sprites[0], renderX, renderY)
+}
+
 
 Bugs.prototype.animation = function () {
     var self = this;
