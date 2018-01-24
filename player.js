@@ -4,7 +4,7 @@ function Player(ctx, width, height){
     var self = this;
 
     self.size = 50;
-    self.jumping = false;
+    self.jumping = true;
 
     self.x_velocity = 0;
     self.y_velocity = 0;
@@ -14,29 +14,29 @@ function Player(ctx, width, height){
     self.gameWidth = width;
     self.gameHeight = height;
 
-    self.x = self.gameWidth / 4;
-    self.y = self.gameHeight / 2;
+    self.x = 110;
+    self.y = 420;
     self.direction = null;
 
-    // self.controller = {
-    //     left: false,
-    //     right: false,
-    //     up: false,
-    //     keyListener: function(event){
-    //         var key_state = (event.type == "keydown")?true:false;
-    //         switch(event.keyCode){
-    //             case 37:
-    //                 controller.left = key_state;
-    //             break;
-    //             case 38:
-    //                 controller.up = key_state;
-    //             break;
-    //             case 39:
-    //                 controller.down = key_state
-    //             break;
-    //         }
-    //     }        
-    // }
+    self.controls = {
+        left: false,
+        right: false,
+        up: false,
+        keyListener: function(event){
+            var key_state = (event.type == "keydown")?true:false;
+            switch(event.keyCode){
+                case 37:
+                    controls.left = key_state;
+                break;
+                case 38:
+                    controls.up = key_state;
+                break;
+                case 39:
+                    controls.down = key_state
+                break;
+            }
+        }        
+    }
 }
 
 //     self.sprites = [document.querySelector("sprite1"), document.querySelector("sprite2")];
@@ -76,29 +76,35 @@ Player.prototype.draw = function () {
 Player.prototype.controller = function () {
     var self = this;
 
-    if(self.controller.up && self.controller.jumping == false){
-        self.controller.y_velocity -= 20;
-        self.controller.jumping = true;
+
+    if (self.y <= 420) {
+    
+        if(self.controls.up && self.jumping == false){
+            self.y_velocity -= 50;
+            self.jumping = true;
+        }
+    
+        if (self.controls.left) {
+            self.x_velocity -= 0.5; // smoother movings
+        }
+    
+        if (self.controls.right) {
+            self.x_velocity += 0.5;
+        }
+
+        self.y_velocity += 1.50; //gravity
+        self.x += self.x_velocity;
+        self.y += self.y_velocity;
+        self.x_velocity *= 0.9; // friction
+        self.y_velocity *= 0.9;
+    
     }
     
-    if (self.controller.left) {
-        self.controller.x_velocity -= 0.5; // smoother movings
+    if (self.y > 420) {
+        self.y_velocity = 0;
+        self.jumping = false;
+         self.y = 420;
     }
-    
-    if (self.controller.right) {
-        self.controller.x_velocity += 0.5;
-    }
-
-    self.y_velocity += 1.50; //gravity
-    self.x += self.x_velocity;
-    self.y += self.y_velocity;
-    self.x_velocity *= 0.9; // friction
-    self.y_velocity *= 0.9;
-
-    // if (self.y > 400) {
-    //     self.y_velocity = 0;
-    //     self.jumping = true;
-    // }
 }
 
 Player.prototype.jump = function (event) { 
@@ -106,13 +112,13 @@ Player.prototype.jump = function (event) {
     var key_state = (event.type == "keydown") ? true : false;
     switch(event.keyCode){
         case 37:
-            self.controller.left = key_state;
+            self.controls.left = key_state;
         break;
         case 38:
-            self.controller.up = key_state;
+            self.controls.up = key_state;
         break;
         case 39:
-            self.controller.right = key_state
+            self.controls.right = key_state
         break;
     }
 }

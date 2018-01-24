@@ -22,16 +22,18 @@ function Game(mainDiv) {
   self.bug = new Bugs(self.ctx, self.width, self.height);
   self.environment = new Environment(self.ctx, self.canvas);
 
-  window.addEventListener("keydown", self.player.controller.bind(self.player));
-  window.addEventListener("keyup", self.player.controller.bind(self.player));
+  window.addEventListener("keydown", self.player.jump.bind(self.player));
+  window.addEventListener("keyup", self.player.jump.bind(self.player));
 
-  //  self.jumping = function (event) {
-  //    var key = event.key.toLowerCase();
-  //    if (key === "Spacebar"){
-  //      self.player.velY = -16;
-  //      console.log("test");
-  //  }
-  // }
+  function detectionCollision() {
+    if (self.player.x < self.bug.x + self.bug.width &&
+      self.player.x + self.player.width > self.bug.x &&
+      self.player.y < self.bug.y + self.bug.height &&
+      self.player.height + self.player.y > self.bug.y) {
+       alert("Collision detected");
+   }
+   
+  }
 
   function doAnimation() {
 
@@ -42,7 +44,8 @@ function Game(mainDiv) {
      self.bug.draw();
      self.bug.animation();
     //  self.player.jump();
-    self.player.controller();
+     self.player.controller();
+     detectionCollision();
 
 
     if (!self.finished){
