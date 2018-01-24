@@ -78,10 +78,13 @@ function main(){
     playAgainButton.addEventListener("click", playAgainClick);
   }
 
-  function destroyGameOverScreen() {
-    playAgainButton.removeEventListener('click', playAgainClick);
-    gameOver.remove();
-  }
+
+
+  // // game.onGameOver()
+  // function destroyGameOverScreen() {
+  //   playAgainButton.removeEventListener('click', playAgainClick);
+  //   gameOver.remove();
+  // }
 
   buildStartPage();
 

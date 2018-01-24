@@ -3,6 +3,8 @@
 function Game(mainDiv) {
   var self = this;
 
+  self.score = 0;
+
   self.mainDiv = mainDiv;
 
   self.finished = false;
@@ -15,24 +17,50 @@ function Game(mainDiv) {
   self.canvas.height = 500;
   mainDiv.appendChild(self.canvas);
 
+  var footer = document.createElement("footer");
+  footer.innerText = "Copyright: Stephanie Senoner";
+  mainDiv.appendChild(footer);
+
+
   self.ctx = self.canvas.getContext('2d');
   self.player = new Player(self.ctx, self.width, self.height);
-  
-  self.snippet = new Snippets(self.ctx, self.width, self.height);
-  self.bug = new Bugs(self.ctx, self.width, self.height);
   self.environment = new Environment(self.ctx, self.canvas);
 
+  self.bugsArray = [];
+  window.setInterval( function(){ 
+    self.bugsArray.push(new Bugs(self.ctx, self.width, self.height));
+    }, 3500);
+
+  self.snippetsArray = [];
+  window.setInterval( function(){ 
+    self.snippetsArray.push(new Snippets(self.ctx, self.width, self.height));
+    }, 2500);
+  
   window.addEventListener("keydown", self.player.jump.bind(self.player));
   window.addEventListener("keyup", self.player.jump.bind(self.player));
 
   function detectionCollision() {
-    if (self.player.x < self.bug.x + self.bug.size &&
-      self.player.x + self.player.size > self.bug.x &&
-      self.player.y < self.bug.y + self.bug.size &&
-      self.player.size + self.player.y > self.bug.y) {
-       console.log("Collision detected");
-   }
-   
+    for (var i = 0; i < self.bugsArray.length; i++){
+    if (self.player.x < self.bugsArray[i].x + self.bugsArray[i].size &&
+      self.player.x + self.player.size > self.bugsArray[i].x &&
+      self.player.y < self.bugsArray[i].y + self.bugsArray[i].size &&
+      self.player.size + self.player.y > self.bugsArray[i].y) {
+       self.score -= 10;
+       self.bugsArray.splice(self.bugsArray.indexOf(self.bugsArray[i], 1));
+    }
+  }
+  }
+  
+  function detectionSnippets() {
+    for (var i = 0; i < self.snippetsArray.length; i++){
+    if (self.player.x < self.snippetsArray[i].x + self.snippetsArray[i].size &&
+      self.player.x + self.player.size > self.snippetsArray[i].x &&
+      self.player.y < self.snippetsArray[i].y + self.snippetsArray[i].size &&
+      self.player.size + self.player.y > self.snippetsArray[i].y) {
+       self.score += 10;
+       self.snippetsArray.splice(self.snippetsArray.indexOf(self.snippetsArray[i], 1));
+    }
+  }
   }
 
   function doAnimation() {
@@ -41,12 +69,24 @@ function Game(mainDiv) {
      self.environment.render();
      self.environment.update();
      self.player.draw();
-     self.bug.draw();
-     self.bug.animation();
-    //  self.player.jump();
+     self.bugsArray.forEach(function(element) {
+       element.draw();
+      });
+     self.bugsArray.forEach(function(element) {
+      element.animation();
+      });
+     self.snippetsArray.forEach(function(element) {
+      element.draw();
+      });
+     self.snippetsArray.forEach(function(element) {
+     element.animation();
+      });
      self.player.controller();
      detectionCollision();
-
+     detectionSnippets();
+     self.ctx.font = "20px Arial, sans-serif";
+     self.ctx.fillStyle = "black";
+     self.ctx.fillText("Score:" + self.score, 10, 50);
 
     if (!self.finished){
      window.requestAnimationFrame(doAnimation);
@@ -66,11 +106,12 @@ Game.prototype.destroy = function () {
 }
 
 // Game.prototype.onGameOver = function(){
+  // var self = this;
+  // self.ended = callback;
 
 
-
-//game.onGameOver(function (){
-  destroyGame();
-  buildGameover();
-})
-}
+// //game.onGameOver(function (){
+//   destroyGame();
+//   buildGameover();
+// })
+// }
