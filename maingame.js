@@ -26,10 +26,11 @@ function Game(mainDiv) {
   self.player = new Player(self.ctx, self.width, self.height);
   self.environment = new Environment(self.ctx, self.canvas);
 
-  self.bugsArray = [];
+  self.bug = new Bugs(self.ctx, self.width, self.height);
+
   window.setInterval( function(){ 
-    self.bugsArray.push(new Bugs(self.ctx, self.width, self.height));
-    }, 3500);
+  self.bug = new Bugs(self.ctx, self.width, self.height)
+   }, 1500);
 
   self.snippetsArray = [];
   window.setInterval( function(){ 
@@ -39,25 +40,27 @@ function Game(mainDiv) {
   window.addEventListener("keydown", self.player.jump.bind(self.player));
   window.addEventListener("keyup", self.player.jump.bind(self.player));
 
-  function detectionCollision() {
-    for (var i = 0; i < self.bugsArray.length; i++){
-    if (self.player.x < self.bugsArray[i].x + self.bugsArray[i].size &&
-      self.player.x + self.player.size > self.bugsArray[i].x &&
-      self.player.y < self.bugsArray[i].y + self.bugsArray[i].size &&
-      self.player.size + self.player.y > self.bugsArray[i].y) {
-       self.score -= 10;
-       self.bugsArray.splice(self.bugsArray.indexOf(self.bugsArray[i], 1));
-    }
-  }
-  }
+  // function detectionCollision() {
+  //   for (var i = 0; i < self.bugs.length; i++){
+  //   if (self.player.x < self.bugs[i].x + self.bugs[i].size &&
+  //     self.player.x + self.player.size > self.bugs[i].x &&
+  //     self.player.y < self.bugs[i].y + self.bugs[i].size &&
+  //     self.player.size + self.player.y > self.bugs[i].y) {
+  //      self.score -= 10;
+  //      self.bugs.splice(self.bugs.indexOf(self.bugs[i], 1));
+  //   }
+  // }
+  // }
   
   function detectionSnippets() {
     for (var i = 0; i < self.snippetsArray.length; i++){
+
     if (self.player.x < self.snippetsArray[i].x + self.snippetsArray[i].size &&
       self.player.x + self.player.size > self.snippetsArray[i].x &&
       self.player.y < self.snippetsArray[i].y + self.snippetsArray[i].size &&
       self.player.size + self.player.y > self.snippetsArray[i].y) {
        self.score += 10;
+       console.log(self.snippetsArray[i], i);
        self.snippetsArray.splice(self.snippetsArray.indexOf(self.snippetsArray[i], 1));
     }
   }
@@ -69,12 +72,8 @@ function Game(mainDiv) {
      self.environment.render();
      self.environment.update();
      self.player.draw();
-     self.bugsArray.forEach(function(element) {
-       element.draw();
-      });
-     self.bugsArray.forEach(function(element) {
-      element.animation();
-      });
+     self.bug.draw();
+     self.bug.animation();
      self.snippetsArray.forEach(function(element) {
       element.draw();
       });
@@ -82,7 +81,7 @@ function Game(mainDiv) {
      element.animation();
       });
      self.player.controller();
-     detectionCollision();
+    //  detectionCollision();
      detectionSnippets();
      self.ctx.font = "20px Arial, sans-serif";
      self.ctx.fillStyle = "black";
