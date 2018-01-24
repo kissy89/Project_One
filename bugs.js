@@ -10,7 +10,7 @@ function Bugs(ctx, width, height){
     self.gameWidth = width;
     self.gameHeight = height;
 
-    self.x = Math.random() * 300;
+    self.x = 850;
     self.y = self.gameHeight / 2;
     self.direction = null;
 }

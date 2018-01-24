@@ -16,34 +16,22 @@ function Game(mainDiv) {
   mainDiv.appendChild(self.canvas);
 
   self.ctx = self.canvas.getContext('2d');
-
   self.player = new Player(self.ctx, self.width, self.height);
+  
   self.snippet = new Snippets(self.ctx, self.width, self.height);
   self.bug = new Bugs(self.ctx, self.width, self.height);
   self.environment = new Environment(self.ctx, self.canvas);
 
-  self.jumping = function (event) {
-    var key = event.key.toLowerCase();
-    if (key === "Space"){
-      self.player.velY = -16;
-      console.log("test");
-  }
-}
-  document.addEventListener('keydown', self.jumping);
+  window.addEventListener("keydown", self.player.controller.bind(self.player));
+  window.addEventListener("keyup", self.player.controller.bind(self.player));
 
-
-//   var bugsArray = [];
-// @ todo - random bugs
-// function init() {
-    
-//     for (var i = 0; i < 10; i++){
-//         var x = 800;
-//         var y = Math.random() * 100;
-//         var self.width = Math.random() * 50;
-//         var self.width = Math.random() * 50;
-//         bugsArray.push(new bug(self.ctx, self.width, self.height));
-//     } 
-// }
+  //  self.jumping = function (event) {
+  //    var key = event.key.toLowerCase();
+  //    if (key === "Spacebar"){
+  //      self.player.velY = -16;
+  //      console.log("test");
+  //  }
+  // }
 
   function doAnimation() {
 
@@ -51,10 +39,10 @@ function Game(mainDiv) {
      self.environment.render();
      self.environment.update();
      self.player.draw();
-    //  self.player.update();
-    //  self.player.render();
      self.bug.draw();
      self.bug.animation();
+    //  self.player.jump();
+    self.player.controller();
 
 
     if (!self.finished){
@@ -72,5 +60,4 @@ Game.prototype.destroy = function () {
 
   self.canvas.remove();
 
-  document.removeEventListener('keydown', self.jumping);
 }
