@@ -11,11 +11,17 @@ function Player(ctx, width, height){
 
     self.ctx = ctx;
 
+    self.spriteIndex = 0;
+    self.ticks = 0;
+
+
     self.gameWidth = width;
     self.gameHeight = height;
 
-    self.sprites = [document.getElementById("sprite1"), document.getElementById("sprite2"),
-    document.getElementById("sprite3"), document.getElementById("sprite4"),document.getElementById("sprite5")];
+    self.sprites = [document.getElementById("sprite1"),
+    document.getElementById("sprite3"), document.getElementById("sprite4"),
+    document.getElementById("sprite5"), document.getElementById("sprite6"),
+    document.getElementById("sprite7"), document.getElementById("sprite7")];
 
 
     self.x = 110;
@@ -68,7 +74,14 @@ Player.prototype.render = function () {
      var self = this;
      var renderX = self.x - self.size/2;
      var renderY = self.y - self.size/2;
-     self.ctx.drawImage(self.sprites[0], renderX, renderY)
+     self.ctx.drawImage(self.sprites[this.spriteIndex], renderX, renderY)
+}
+
+Player.prototype.update = function () {
+    var self = this;
+    self.ticks++;
+    if (self.ticks % 15 === 0) {self.spriteIndex = (self.spriteIndex+1) % self.sprites.length;
+    };
 }
 
 Player.prototype.controller = function () {

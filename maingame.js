@@ -73,6 +73,7 @@ function Game(mainDiv) {
      self.environment.update();
     //  self.player.draw();
      self.player.render();
+     self.player.update();
     //  self.bug.draw();
      self.bug.render();
      self.bug.animation();
@@ -103,7 +104,9 @@ Game.prototype.destroy = function () {
   self.finished = true;
 
   self.canvas.remove();
-
+  
+  window.removeEventListener("keydown", self.player.jump.unbind(self.player));
+  window.removeEventListener("keyup", self.player.jump.unbind(self.player));
 }
 
 // Game.prototype.onGameOver = function(){
