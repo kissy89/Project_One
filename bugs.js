@@ -3,7 +3,7 @@
 function Bugs(ctx, width, height){
     var self = this;
 
-    self.size = 80;
+    self.size = 50;
     self.dx = -4;
     self.ctx = ctx;
 

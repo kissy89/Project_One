@@ -26,11 +26,11 @@ function Game(mainDiv) {
   window.addEventListener("keyup", self.player.jump.bind(self.player));
 
   function detectionCollision() {
-    if (self.player.x < self.bug.x + self.bug.width &&
-      self.player.x + self.player.width > self.bug.x &&
-      self.player.y < self.bug.y + self.bug.height &&
-      self.player.height + self.player.y > self.bug.y) {
-       alert("Collision detected");
+    if (self.player.x < self.bug.x + self.bug.size &&
+      self.player.x + self.player.size > self.bug.x &&
+      self.player.y < self.bug.y + self.bug.size &&
+      self.player.size + self.player.y > self.bug.y) {
+       console.log("Collision detected");
    }
    
   }
@@ -63,4 +63,14 @@ Game.prototype.destroy = function () {
 
   self.canvas.remove();
 
+}
+
+// Game.prototype.onGameOver = function(){
+
+
+
+//game.onGameOver(function (){
+  destroyGame();
+  buildGameover();
+})
 }
