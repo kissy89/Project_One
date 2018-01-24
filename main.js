@@ -47,7 +47,7 @@ function main(){
       window.setTimeout(function () {
         destroyGame();
         gameOverScreen1();
-      }, 1000);
+      }, 8000);
   }
 
   function destroyGame(){

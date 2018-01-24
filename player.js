@@ -49,21 +49,9 @@ function Player(ctx, width, height){
     }
 }
 
-//     self.sprites = [document.querySelector("sprite1"), document.querySelector("sprite2")];
-// };
+// @ queryselector instead of getelementbyid
 
-// Player.prototype.setDirection = function (){
-//     var self = this;
-
-//     self.direction = direction;
-// }
-
-// Player.prototype.update = function () {
-//     var self = this;
-
-// }
-
-Player.prototype.draw = function () {
+Player.prototype.draw = function () {       // unnecessary if sprites
     var self = this;
     
     self.ctx.fillStyle = "black";

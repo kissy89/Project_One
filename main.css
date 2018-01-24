@@ -71,7 +71,7 @@ footer {
     text-align: center;
 }
 
-button {
+.buttons {
     color: rgb(14, 6, 6);
     background: rgb(60, 60, 197);
 }

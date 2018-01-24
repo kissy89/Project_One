@@ -26,11 +26,8 @@ function Game(mainDiv) {
   
   self.player = new Player(self.ctx, self.width, self.height);
   self.environment = new Environment(self.ctx, self.canvas);
-  self.bug = new Bugs(self.ctx, self.width, self.height);
-
-  window.setInterval( function(){ 
+  self.bug = new Bugs(self.ctx, self.width, self.height); 
   self.bug = new Bugs(self.ctx, self.width, self.height)
-   }, 1500);
 
   self.snippetsArray = [];
   window.setInterval( function(){ 
@@ -52,9 +49,9 @@ function Game(mainDiv) {
   // }
   // }
   
-  if (self.score < 200 || self.lives === 0){
-    self.finished = true;
-  } 
+   if (self.score < 200 || self.lives === 0){
+     self.finished = true;
+   } 
 
   function detectionSnippets() {
     for (var i = 0; i < self.snippetsArray.length; i++){
@@ -91,8 +88,11 @@ function Game(mainDiv) {
     //  detectionCollision();
      detectionSnippets();
      self.ctx.font = "20px Arial, sans-serif";
-     self.ctx.fillStyle = "black";
+     self.ctx.fillStyle = "red";
      self.ctx.fillText("Score:" + self.score, 10, 50);
+     self.ctx.font = "20px Arial, sans-serif";
+     self.ctx.fillStyle = "red";
+     self.ctx.fillText("Lives:" + self.lives, 10, 50);
 
     if (!self.finished){
      window.requestAnimationFrame(doAnimation);
@@ -113,14 +113,3 @@ Game.prototype.destroy = function () {
   window.removeEventListener("keydown", self.player.jump.bind(self.player));
   window.removeEventListener("keyup", self.player.jump.bind(self.player));
 }
-
-// Game.prototype.onGameOver = function(){
-  // var self = this;
-  // self.ended = callback;
-
-
-// //game.onGameOver(function (){
-//   destroyGame();
-//   buildGameover();
-// })
-// }
