@@ -45,12 +45,6 @@ Bugs.prototype.render = function () {                                           
 Bugs.prototype.animation = function () {                                        // moving bugs
     var self = this;
     
-    self.x = self.x - 4;
+    self.x = self.x -4;
     self.ctx.clearRect(0, 0, self.ctx.width, self.ctx.height);
 }
-
-// Bugs.prototype.collision = function () {
-//     var self = this;
-
-
-// }
