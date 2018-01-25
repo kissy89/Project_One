@@ -6,8 +6,10 @@ function Game(mainDiv) {
   self.mainDiv = mainDiv;
 
   self.finished = false;
+  self.onEnded;
+
   self.score = 0; // score or lives
-  self.lives = 5;
+  self.lives = 5; // lives ((new))
 
   self.width = window.innerWidth;
   self.height = window.innerHeight;
@@ -27,7 +29,7 @@ function Game(mainDiv) {
   self.player = new Player(self.ctx, self.width, self.height);
   self.environment = new Environment(self.ctx, self.canvas);
   self.bug = new Bugs(self.ctx, self.width, self.height); 
-  self.bug2 = new Bugs(self.ctx, self.width, self.height);
+  // self.bug2 = new Bugs(self.ctx, self.width, self.height);
 
   self.snippetsArray = [];
   window.setInterval( function(){ 
@@ -37,21 +39,26 @@ function Game(mainDiv) {
   window.addEventListener("keydown", self.player.jump.bind(self.player));
   window.addEventListener("keyup", self.player.jump.bind(self.player));
 
-  //  function detectionCollisionBugs() {
-  //    for (var i = 0; i < self.bugs.length; i++){
-  //    if (self.player.x < self.bugs[i].x + self.bugs[i].size &&
-  //      self.player.x + self.player.size > self.bugs[i].x &&
-  //      self.player.y < self.bugs[i].y + self.bugs[i].size &&
-  //      self.player.size + self.player.y > self.bugs[i].y) {
-  //       self.lives -= 1;
-  //       self.bugs.splice(self.bugs.indexOf(self.bugs[i], 1));
-  //    }
+   function detectionCollisionBugs() {
+    //  for (var i = 0; i < self.bug; i++){
+     if (self.player.x < self.bug.x + self.bug.size &&
+       self.player.x + self.player.size > self.bug.x &&
+       self.player.y < self.bug.y + self.bug.size &&
+       self.player.size + self.player.y > self.bug.y) {
+        self.lives -= 1;
+        console.log("cat");
+     }
   //  }
-  // }
+  }
   
-   if (self.score > 200 || self.lives === 0){
-     self.finished = true;
-   } 
+  Game.prototype.gameEnding = function (){ 
+  var self = this;
+
+  if (self.score > 20){
+     self.gameOver = callback;
+   }
+
+  }
 
   function detectionSnippets() {
     for (var i = 0; i < self.snippetsArray.length; i++){
@@ -67,13 +74,13 @@ function Game(mainDiv) {
   }
   }
 
-  self.bugsArray = [];
+  // self.bugsArray = [];
 
-  for (var i = 0; i < 15; i++){
-    self.bug = new Bugs(self.ctx, self.width, self.height);
-    self.bugsArray.push(self.bug);
-    console.log("array pushed");
-  }
+  // for (var i = 0; i < 15; i++){
+  //   self.bug = new Bugs(self.ctx, self.width, self.height);
+  //   self.bugsArray.push(self.bug);
+  //   console.log("array pushed");
+  // }
 
 
  //@ todo 
@@ -88,22 +95,24 @@ function Game(mainDiv) {
     //  self.bug.draw();
      self.bug.render();
      self.bug.animation();
-     self.bug2.render();
-     self.bug2.animation();
+    //  self.bug2.render();
+    //  self.bug2.animation();
      self.snippetsArray.forEach(function(element) {
       element.draw();
       });
      self.snippetsArray.forEach(function(element) {
      element.animation();
       });
-      setInterval(self.bugsArray.forEach(function(element) {
-        element.render()}), 1000);
-      self.bugsArray.forEach(function(element) {
-        element.animation();
-      });
+      // setInterval(self.bugsArray.forEach(function(element) {
+      //   element.render()}), 1000);
+      // self.bugsArray.forEach(function(element) {
+      //   element.animation();
+      // });
      self.player.controller();
-    //  detectionCollisionBugs();
+     detectionCollisionBugs();
      detectionSnippets();
+    //  self.gameEndedScore();
+
      self.ctx.font = "20px Arial, sans-serif";
      self.ctx.fillStyle = "red";
      self.ctx.fillText("Score:" + self.score, 10, 50);
@@ -111,8 +120,10 @@ function Game(mainDiv) {
      self.ctx.fillStyle = "red";
      self.ctx.fillText("Lives:" + self.lives, 110, 50);
 
-    if (!self.finished){
-     window.requestAnimationFrame(doAnimation);
+    if (self.lives <= 0){
+     self.onEnded();
+    } else {
+      window.requestAnimationFrame(doAnimation);
     }
  }
 
@@ -122,11 +133,15 @@ function Game(mainDiv) {
 Game.prototype.destroy = function () {
   var self = this;
 
-  self.finished = true;
-
   self.canvas.remove();
   self.footer.remove();
 
   window.removeEventListener("keydown", self.player.jump.bind(self.player));
   window.removeEventListener("keyup", self.player.jump.bind(self.player));
+}
+
+Game.prototype.onGameOver = function (callback) {
+  var self = this;
+
+  self.onEnded = callback;
 }

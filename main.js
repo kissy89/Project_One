@@ -43,11 +43,13 @@ function main(){
       stage = "game";
       game = new Game(mainDiv);
 
-      window.setTimeout(function () {
+      game.onGameOver(function () {
         destroyGame();
         gameOverScreen1();
-      }, 10000);
-  }
+      });
+  
+  
+   }
 
   function destroyGame(){
     game.destroy();
