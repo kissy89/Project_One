@@ -27,14 +27,14 @@ Bugs.prototype.setDirection = function (){
     self.direction = direction;
 }
 
-Bugs.prototype.draw = function () {
+Bugs.prototype.draw = function () {                                             // drawing the bugs in general
     var self = this;
     
     self.ctx.fillStyle = "white";
     self.ctx.fillRect(self.x, self.y, self.size, self.size);
 }
 
-Bugs.prototype.render = function () {
+Bugs.prototype.render = function () {                                           // rendering images sprites
     var self = this;
     var renderX = self.x - self.size/2;
     var renderY = self.y - self.size/2;
@@ -42,11 +42,15 @@ Bugs.prototype.render = function () {
 }
 
 
-Bugs.prototype.animation = function () {
+Bugs.prototype.animation = function () {                                        // moving bugs
     var self = this;
     
-    //self.ctx.fillStyle = "white";
-    //self.ctx.fillRect(self.x, self.y, self.size, self.size);
     self.x = self.x - 4;
     self.ctx.clearRect(0, 0, self.ctx.width, self.ctx.height);
 }
+
+// Bugs.prototype.collision = function () {
+//     var self = this;
+
+
+// }

@@ -26,7 +26,6 @@ function Player(ctx, width, height){
 
     self.x = 110;
     self.y = 420;
-    self.direction = null;
 
     self.controls = {
         left: false,
@@ -49,78 +48,64 @@ function Player(ctx, width, height){
     }
 }
 
-//     self.sprites = [document.querySelector("sprite1"), document.querySelector("sprite2")];
-// };
-
-// Player.prototype.setDirection = function (){
-//     var self = this;
-
-//     self.direction = direction;
-// }
-
-// Player.prototype.update = function () {
-//     var self = this;
-
-// }
-
-Player.prototype.draw = function () {
+Player.prototype.draw = function () {                                         // draw player
     var self = this;
     
     self.ctx.fillStyle = "black";
     self.ctx.fillRect(self.x, self.y, self.size, self.size);
 }
 
-Player.prototype.render = function () {
-     var self = this;
-     var renderX = self.x - self.size/2;
-     var renderY = self.y - self.size/2;
-     self.ctx.drawImage(self.sprites[self.spriteIndex], renderX, renderY)
+Player.prototype.render = function () {                                       // rendering for sprites
+    var self = this;
+
+    var renderX = self.x - self.size/2;
+    var renderY = self.y - self.size/2;
+    self.ctx.drawImage(self.sprites[self.spriteIndex], renderX, renderY)
 }
 
-Player.prototype.update = function () {
+Player.prototype.animation = function () {                                     // animation player moving
     var self = this;
+
     self.ticks++;
-    if (self.ticks % 15 === 0) {self.spriteIndex = (self.spriteIndex+1) % self.sprites.length;
+    if (self.ticks % 12 === 0) {
+        self.spriteIndex = (self.spriteIndex+1) % self.sprites.length;
     };
 }
 
-Player.prototype.controller = function () {
+Player.prototype.controller = function () {                                    // if key is down
     var self = this;
 
-
     if (self.y <= 420) {
-    
         if(self.controls.up && self.jumping == false){
             self.y_velocity -= 50;
             self.jumping = true;
         }
-    
-        if (self.controls.left) {
-            self.x_velocity -= 0.5; // smoother movings
+        else if (self.controls.left) {
+            self.x_velocity -= 0.5;                                             // smoother movings
         }
-    
-        if (self.controls.right) {
+        else if (self.controls.right) {
             self.x_velocity += 0.5;
         }
 
-        self.y_velocity += 1.50; //gravity
+        self.y_velocity += 1.50;                                                // gravity
         self.x += self.x_velocity;
         self.y += self.y_velocity;
-        self.x_velocity *= 0.9; // friction
+        self.x_velocity *= 0.9;                                                 // friction
         self.y_velocity *= 0.9;
-    
     }
     
     if (self.y > 420) {
         self.y_velocity = 0;
         self.jumping = false;
-         self.y = 420;
+        self.y = 420;
     }
 }
 
-Player.prototype.jump = function (event) { 
+Player.prototype.jump = function (event) {                                       // jumping prototype
     var self = this;
+
     var key_state = (event.type == "keydown") ? true : false;
+    
     switch(event.keyCode){
         case 37:
             self.controls.left = key_state;

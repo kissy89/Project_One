@@ -5,7 +5,6 @@ function Game(mainDiv) {
 
   self.mainDiv = mainDiv;
 
-  self.finished = false;
   self.onEnded;
 
   self.score = 0; // score or lives
@@ -14,123 +13,95 @@ function Game(mainDiv) {
   self.width = window.innerWidth;
   self.height = window.innerHeight;
 
-  self.canvas = document.createElement('canvas'); // creating canvas for dom
+  self.canvas = document.createElement('canvas');                       // creating canvas for dom
   self.canvas.width = 800;
   self.canvas.height = 500;
   mainDiv.appendChild(self.canvas);
 
-  self.footer = document.createElement("footer"); // ev remove
-  self.footer.innerText = "Copyright: Stephanie Senoner";
-  mainDiv.appendChild(self.footer);
-
-
   self.ctx = self.canvas.getContext('2d');
   
-  self.player = new Player(self.ctx, self.width, self.height);
+  // self.bugArray = [];
+  // for (var i = 0; i < 15; i++){
+  //   self.bug = new Bugs(self.ctx, self.width, self.height);
+  //   self.bugArray.push(self.bug);
+  // }
+
+  // self.snippetsArray = [];
+  // for (var i = 0; i < 15; i++){
+  //   self.snippet = new Snippets(self.ctx, self.width, self.height);
+  //   self.snippetArray.push(self.snippet);
+  // }
+
+  self.player = new Player(self.ctx, self.width, self.height);          // creating player, bug, environment
   self.environment = new Environment(self.ctx, self.canvas);
   self.bug = new Bugs(self.ctx, self.width, self.height); 
-  // self.bug2 = new Bugs(self.ctx, self.width, self.height);
 
-  self.snippetsArray = [];
-  window.setInterval( function(){ 
-    self.snippetsArray.push(new Snippets(self.ctx, self.width, self.height));
-    }, 2500);
-  //@ todo snippetsArray ev with images out of code
   window.addEventListener("keydown", self.player.jump.bind(self.player));
   window.addEventListener("keyup", self.player.jump.bind(self.player));
 
-   function detectionCollisionBugs() {
-    //  for (var i = 0; i < self.bug; i++){
-     if (self.player.x < self.bug.x + self.bug.size &&
-       self.player.x + self.player.size > self.bug.x &&
-       self.player.y < self.bug.y + self.bug.size &&
-       self.player.size + self.player.y > self.bug.y) {
-        self.lives -= 1;
-        console.log("cat");
-     }
-  //  }
-  }
+  function doAnimation(){
+    self.ctx.clearRect(0,0, 800, 500);
   
-  Game.prototype.gameEnding = function (){ 
-  var self = this;
+    self.environment.render();
+    
+    self.environment.update();
+    
+    self.player.render();
+    self.player.animation();
+    
+    self.bug.render();
+    self.bug.animation();
+    
+    self.player.controller();
+    
+    // self.collisionBugs();
+    // self.collisionSnippets();
 
-  if (self.score > 20){
-     self.gameOver = callback;
-   }
-
-  }
-
-  function detectionSnippets() {
-    for (var i = 0; i < self.snippetsArray.length; i++){
-
-    if (self.player.x < self.snippetsArray[i].x + self.snippetsArray[i].size &&
-      self.player.x + self.player.size > self.snippetsArray[i].x &&
-      self.player.y < self.snippetsArray[i].y + self.snippetsArray[i].size &&
-      self.player.size + self.player.y > self.snippetsArray[i].y) {
-       self.score += 10;
-       console.log(self.snippetsArray[i], i);
-       self.snippetsArray.splice(self.snippetsArray.indexOf(self.snippetsArray[i], 1));
-    }
-  }
-  }
-
-  // self.bugsArray = [];
-
-  // for (var i = 0; i < 15; i++){
-  //   self.bug = new Bugs(self.ctx, self.width, self.height);
-  //   self.bugsArray.push(self.bug);
-  //   console.log("array pushed");
-  // }
-
-
- //@ todo 
-  function doAnimation() {
-
-     self.ctx.clearRect(0,0, 800, 500);
-     self.environment.render();
-     self.environment.update();
-    //  self.player.draw();
-     self.player.render();
-     self.player.update();
-    //  self.bug.draw();
-     self.bug.render();
-     self.bug.animation();
-    //  self.bug2.render();
-    //  self.bug2.animation();
-     self.snippetsArray.forEach(function(element) {
-      element.draw();
-      });
-     self.snippetsArray.forEach(function(element) {
-     element.animation();
-      });
-      // setInterval(self.bugsArray.forEach(function(element) {
-      //   element.render()}), 1000);
-      // self.bugsArray.forEach(function(element) {
-      //   element.animation();
-      // });
-     self.player.controller();
-     detectionCollisionBugs();
-     detectionSnippets();
-    //  self.gameEndedScore();
-
-     self.ctx.font = "20px Arial, sans-serif";
-     self.ctx.fillStyle = "red";
-     self.ctx.fillText("Score:" + self.score, 10, 50);
-     self.ctx.font = "20px Arial, sans-serif";
-     self.ctx.fillStyle = "red";
-     self.ctx.fillText("Lives:" + self.lives, 110, 50);
-
-    if (self.lives <= 0){
-     self.onEnded();
-    } else {
+    self.ctx.font = "20px Arial, sans-serif";
+    self.ctx.fillStyle = "red";
+    self.ctx.fillText("Score:" + self.score, 10, 50);
+    self.ctx.font = "20px Arial, sans-serif";
+    self.ctx.fillStyle = "red";
+    self.ctx.fillText("Lives:" + self.lives, 110, 50);
+    if (self.isOver()){
+      self.onEnded();
+    } 
+    else {
       window.requestAnimationFrame(doAnimation);
     }
- }
+  };
 
- window.requestAnimationFrame(doAnimation);
-};
+  window.requestAnimationFrame(doAnimation)
+}
 
-Game.prototype.destroy = function () {
+// Game.prototype.collisionBugs = function () {                                        // collision detection with bugs
+//   var self = this;
+  
+//   if (self.player.x < self.bug.x + self.bug.size && self.player.x + self.player.size > self.bug.x &&
+//       self.player.y < self.bug.y + self.bug.size && self.player.size + self.player.y > self.bug.y) {
+//           self.lives -= 1;
+//   };
+// }
+
+// Game.prototype.collisionSnippets = function () {                                    // collision detection with snippets
+//   var self = this;
+  
+//   if (self.player.x < self.snippet.x + self.snippet.size && self.player.x + self.player.size > self.snippet.x &&
+//       self.player.y < self.snippet.y + self.snippet.size && self.player.size + self.player.y > self.snippet.y) {
+//         self.score += 10;
+//   }
+// }
+
+Game.prototype.isOver = function (){                                            // game ending if score above 20
+  var self = this;
+  
+  if (self.score > 20 || self.lives <= 0){
+      return true;
+  }
+  return false;
+}
+
+Game.prototype.destroy = function () {                                        // destroy the canvas, game
   var self = this;
 
   self.canvas.remove();
@@ -140,7 +111,7 @@ Game.prototype.destroy = function () {
   window.removeEventListener("keyup", self.player.jump.bind(self.player));
 }
 
-Game.prototype.onGameOver = function (callback) {
+Game.prototype.onGameOver = function (callback) {                             // what happens at game over?
   var self = this;
 
   self.onEnded = callback;
