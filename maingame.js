@@ -39,6 +39,11 @@ function Game(mainDiv) {
   window.addEventListener("keydown", self.player.jump.bind(self.player));
   window.addEventListener("keyup", self.player.jump.bind(self.player));
 
+  function destroyBug(bug){
+    self.bugArray.splice(bug, 1);
+  } 
+
+
   function doAnimation(){
     self.ctx.clearRect(0,0, 800, 500);
   
@@ -92,13 +97,12 @@ Game.prototype.collisionBugs = function (bug) {                                 
   };
 }
 
-Game.prototype.destroyBug = function (bug){
-  var self = this;
+// Game.prototype.destroyBug = function (bug){
+//   var self = this;
 
-  self.bugArray.splice(self.bugArray.indexOf(bug, 1));
+//   self.bugArray.splice(self.bugArray.indexOf(bug, 1));
 
-}
-
+// }
 
 // Game.prototype.collisionSnippets = function (snippet) {                                    // collision detection with snippets
 //   var self = this;

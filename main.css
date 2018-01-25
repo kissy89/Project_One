@@ -72,9 +72,28 @@ footer {
 }
 
 .buttons {
-    color: rgb(14, 6, 6);
-    background: rgb(60, 60, 197);
-}
+    background: #1e97e8;
+    background-image: -webkit-linear-gradient(top, #1e97e8, #2980b9);
+    background-image: -moz-linear-gradient(top, #1e97e8, #2980b9);
+    background-image: -ms-linear-gradient(top, #1e97e8, #2980b9);
+    background-image: -o-linear-gradient(top, #1e97e8, #2980b9);
+    background-image: linear-gradient(to bottom, #1e97e8, #2980b9);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    text-shadow: 1px 1px 3px #666666;
+    font-family: Georgia;
+    color: #d4d9e6;
+    font-size: 26px;
+    padding: 20px 20px 20px 20px;
+    border: solid #1f628d 2px;
+    text-decoration: none;
+  }
+  
+.buttons:hover {
+    background: #d4260f;
+    text-decoration: none;
+  }
 
 
 
