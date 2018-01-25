@@ -14,6 +14,8 @@ function Bugs(ctx, width, height){
     self.y = Math.random() * 350;
     self.direction = null;
 
+    self.sprites = 0;
+
     self.sprites = [document.getElementById("sprite2"), document.getElementById("sprite2"),
     document.getElementById("sprite3"), document.getElementById("sprite4"),document.getElementById("sprite5")];
 
@@ -24,7 +26,7 @@ Bugs.prototype.setDirection = function (){
 
     self.direction = direction;
 }
-// @todo create array with bugs and randomly appear
+
 Bugs.prototype.draw = function () {
     var self = this;
     
@@ -43,8 +45,8 @@ Bugs.prototype.render = function () {
 Bugs.prototype.animation = function () {
     var self = this;
     
-    // self.ctx.fillStyle = "white";
-    // self.ctx.fillRect(self.x, self.y, self.size, self.size);
+    //self.ctx.fillStyle = "white";
+    //self.ctx.fillRect(self.x, self.y, self.size, self.size);
     self.x = self.x - 4;
     self.ctx.clearRect(0, 0, self.ctx.width, self.ctx.height);
 }

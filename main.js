@@ -25,7 +25,6 @@ function main(){
     startPage.appendChild(title);
 
     startButton = document.createElement("button");
-    startButton.setAttribute("class", "buttons");
     startButton.innerText = "Start the Game";
     startPage.appendChild(startButton);
 
@@ -47,7 +46,7 @@ function main(){
       window.setTimeout(function () {
         destroyGame();
         gameOverScreen1();
-      }, 8000);
+      }, 10000);
   }
 
   function destroyGame(){
@@ -78,16 +77,6 @@ function main(){
     var endText = document.createElement("p");
     endText.innerText = "poor you - write more code";
     gameOver.appendChild(endText);
-
-    var beerImage = document.createElement("img");
-    beerImage.setAttribute("src", "https://giphy.com/stickers/beer-Cs8ipz3YqOyYw");
-    beerImage.setAttribute("height", "300");
-    beerImage.setAttribute("width", "350");
-    beerImage.setAttribute("alt", "beer");
-    gameOver.appendChild(beerImage);
-
-    //@ todo gameoverscreen2 if win
-    //@ todo if condition - loose or winning situation
 
     playAgainButton = document.createElement("button");
     playAgainButton.innerText = "play again";
