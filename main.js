@@ -26,6 +26,7 @@ function buildStartPage(){
 
   startButton = document.createElement("button");
   startButton.innerText = "Start the Game";
+  startButton.setAttribute("class", "buttons");
   startPage.appendChild(startButton);
 
   mainDiv.appendChild(startPage);
