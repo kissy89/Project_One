@@ -33,6 +33,6 @@ Snippets.prototype.animation = function () {
     
     self.ctx.fillStyle = "red";
     self.ctx.fillRect(self.x, self.y, self.size, self.size);
-    self.x = self.x - 1;
+    self.x = self.x - 7;
     self.ctx.clearRect(0, 0, self.ctx.width, self.ctx.height);
 }

@@ -10,7 +10,7 @@ function Environment(ctx, canvas){
     self.ctx = ctx;
     self.imageWidth = 800;
     self.image = new Image();
-    self.image.src = "Untitled.jpg";
+    self.image.src = "./images/hintergrund.png";
 };
 
 Environment.prototype.update = function(){

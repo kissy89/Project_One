@@ -3,7 +3,7 @@
 function Player(ctx, width, height){
     var self = this;
 
-    self.size = 50;
+    self.size = 80;
     self.jumping = true;
 
     self.x_velocity = 0;
@@ -18,10 +18,10 @@ function Player(ctx, width, height){
     self.gameWidth = width;
     self.gameHeight = height;
 
-    self.sprites = [document.getElementById("sprite1"),
-        document.getElementById("sprite3"), document.getElementById("sprite4"),
-        document.getElementById("sprite5"), document.getElementById("sprite6"),
-        document.getElementById("sprite7"), document.getElementById("sprite7")];
+    self.sprites = [document.getElementById("char1"), document.getElementById("char2"),
+        document.getElementById("char3"), document.getElementById("char4"),
+        document.getElementById("char5"), document.getElementById("char6"),
+        document.getElementById("char7")];
 
 
     self.x = 110;
@@ -60,7 +60,7 @@ Player.prototype.render = function () {                                       //
 
     var renderX = self.x - self.size/2;
     var renderY = self.y - self.size/2;
-    self.ctx.drawImage(self.sprites[self.spriteIndex], renderX, renderY)
+    self.ctx.drawImage(self.sprites[self.spriteIndex], renderX, renderY);
 }
 
 Player.prototype.animation = function () {                                     // animation player moving

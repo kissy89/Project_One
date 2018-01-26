@@ -118,7 +118,7 @@ Game.prototype.destroySnippet = function (snippet){
 Game.prototype.isOver = function (){                                            // game ending if score above 20
   var self = this;
   
-  if (self.score > 20 || self.lives <= 0){
+  if (self.score > 150 || self.lives <= 0){
       return true;
   }
   return false;
