@@ -14,14 +14,9 @@ body {
     padding: 20px;
     background-color: black;
     color: white;
-    background-image: url("img_tree.png");
-    background-repeat: no-repeat;
-    background-position: right top;
-}
-
-#startpage {
     background-image: url("./images/Code.jpg");
-    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 
@@ -31,15 +26,20 @@ body {
     font-family: Helvetica, Arial, sans-serif;
     color: white;
     padding: 20px;
-    background-image: url();
-    background-size: auto;
-}
-*/
 }
 
+
 h1 {
+    color: rgb(241, 93, 93);
+    font-size: 72px;
+    text-align: right;
+}
+
+p {
     color: white;
-    font-size: 36px;
+    font-family: Arial;
+    font-size: 30px;
+    text-align: right;
 }
 
 .sprite {

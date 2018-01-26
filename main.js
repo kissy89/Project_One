@@ -83,23 +83,33 @@ function gameOverScreen1() {
   score.innerText = "your score: " + game.score;
   gameOver.appendChild(score);
 
-  if (game.score > 20){
+  if (game.score > 50){
     var endText1 = document.createElement("p");
-    endText1.innerText = "well done </br> you did a great job :) </br> now you can go for a beer :)";
+    endText1.innerText = "well done, you did a great job :) now you can go for a beer :)";
     gameOver.appendChild(endText1);  
+
+    var endImage = document.createElement("img");
+    endImage.setAttribute("src", "./images/giphy.gif");
+    gameOver.appendChild(endImage);
+
   }
+
   else {
     var endText2 = document.createElement("p");
-    endText2.innerText = "uuuuuupppppssss - bad job, Paul <br> you should learn more :)";
+    endText2.innerText = "uuuuuupppppssss - bad job, Paul \n you should learn more :)";
     gameOver.appendChild(endText2);
+
+    var endImage = document.createElement("img");
+    endImage.setAttribute("src", "./images/resignationimage.png");
+    gameOver.appendChild(endImage);
   }
+
+  mainDiv.appendChild(gameOver);
 
   playAgainButton = document.createElement("button");
   playAgainButton.setAttribute("class", "buttons");
   playAgainButton.innerText = "play again";
-  gameOver.appendChild(playAgainButton);
-
-  mainDiv.appendChild(gameOver);
+  mainDiv.appendChild(playAgainButton);
 
   playAgainButton.addEventListener("click", playAgainClick);
 }

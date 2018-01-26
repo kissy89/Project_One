@@ -13,6 +13,18 @@ function Snippets(ctx, width, height){
     self.x = 850;
     self.y = Math.random() * width;
     self.direction = null;
+
+    self.image;
+    self.images = [document.getElementById("snippet1"), document.getElementById("snippet2"),
+    document.getElementById("snippet3"), document.getElementById("snippet4"),document.getElementById("snippet5")];
+
+    self.randomImage();
+}
+
+Snippets.prototype.randomImage = function () {
+    var self = this;
+
+    self.image = self.images[Math.floor(Math.random()*self.images.length)];
 }
 
 Snippets.prototype.setDirection = function (){
@@ -24,15 +36,18 @@ Snippets.prototype.setDirection = function (){
 Snippets.prototype.draw = function () {
     var self = this;
     
-    self.ctx.fillStyle = "red";
-    self.ctx.fillRect(self.x, self.y, self.size, self.size);
+    self.ctx.drawImage(self.image, self.x, self.y);
 }
 
 Snippets.prototype.animation = function () {
     var self = this;
     
-    self.ctx.fillStyle = "red";
-    self.ctx.fillRect(self.x, self.y, self.size, self.size);
     self.x = self.x - 7;
     self.ctx.clearRect(0, 0, self.ctx.width, self.ctx.height);
 }
+
+// Snippets.prototype.render = function () {                                           // rendering images sprites
+//     var self = this;
+    
+//     self.ctx.drawImage(self.sprites[Math.floor(Math.random()*2)])
+// }
