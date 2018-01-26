@@ -62,12 +62,27 @@ function Game(mainDiv) {
 
     self.player.controller();
 
+    self.ctx.beginPath();
+    self.ctx.fillStyle = "black";
+    self.ctx.fillRect(0,0, 800, 40);
+    self.ctx.closePath();
+
+    self.ctx.beginPath();
     self.ctx.font = "20px Arial, sans-serif";
     self.ctx.fillStyle = "red";
-    self.ctx.fillText("Score:" + self.score, 10, 50);
+    self.ctx.fillText("Score:" + self.score, 10, 30);
+    self.ctx.closePath();
+
+    self.ctx.beginPath();
     self.ctx.font = "20px Arial, sans-serif";
     self.ctx.fillStyle = "red";
-    self.ctx.fillText("Lives:" + self.lives, 310, 50);
+    self.ctx.fillText("Lives:" + self.lives, 700, 30);
+    self.ctx.closePath();
+
+    self.ctx.beginPath();
+    self.ctx.fillStyle = "black";
+    self.ctx.fillRect(0, 433, 800, 50);
+    self.ctx.closePath();
     
     if (self.isOver()){
       self.onEnded();
@@ -118,7 +133,7 @@ Game.prototype.destroySnippet = function (snippet){
 Game.prototype.isOver = function (){                                            // game ending if score above 20
   var self = this;
   
-  if (self.score > 150 || self.lives <= 0){
+  if (self.score > 50 || self.lives <= 0){
       return true;
   }
   return false;

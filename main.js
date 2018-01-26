@@ -21,8 +21,17 @@ function buildStartPage(){
   startPage.setAttribute("id", "start");
 
   var title = document.createElement("h1");
-  title.innerText = "Run your Beer, Paul";
+  title.innerText = "< Coding Paul >";
   startPage.appendChild(title);
+
+  var instructions = document.createElement("p");
+  instructions.innerText = "try to collect all missing parts of your code";
+  startPage.appendChild(instructions);  
+  
+  var part2 = document.createElement("p");
+  part2.innerText = "if you win, you can go for a beer :)";
+  startPage.appendChild(part2);
+  
 
   startButton = document.createElement("button");
   startButton.innerText = "Start the Game";
@@ -74,11 +83,19 @@ function gameOverScreen1() {
   score.innerText = "your score: " + game.score;
   gameOver.appendChild(score);
 
-  var endText = document.createElement("p");
-  endText.innerText = "poor you - write more code";
-  gameOver.appendChild(endText);
+  if (game.score > 20){
+    var endText1 = document.createElement("p");
+    endText1.innerText = "well done </br> you did a great job :) </br> now you can go for a beer :)";
+    gameOver.appendChild(endText1);  
+  }
+  else {
+    var endText2 = document.createElement("p");
+    endText2.innerText = "uuuuuupppppssss - bad job, Paul <br> you should learn more :)";
+    gameOver.appendChild(endText2);
+  }
 
   playAgainButton = document.createElement("button");
+  playAgainButton.setAttribute("class", "buttons");
   playAgainButton.innerText = "play again";
   gameOver.appendChild(playAgainButton);
 
