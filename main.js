@@ -109,7 +109,7 @@ function gameOverScreen1() {
   playAgainButton = document.createElement("button");
   playAgainButton.setAttribute("class", "buttons");
   playAgainButton.innerText = "play again";
-  mainDiv.appendChild(playAgainButton);
+  gameOver.appendChild(playAgainButton);
 
   playAgainButton.addEventListener("click", playAgainClick);
 }
